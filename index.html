@@ -6,71 +6,75 @@
     <title>NEXUS</title>
     <style>
         :root {
-            --bg-dark: #020205;
+            --bg-dark: #000000;
             --glass-bg: rgba(255, 255, 255, 0.03);
             --glass-border: rgba(255, 255, 255, 0.1);
             --accent-blue: #007AFF;
             --text-color: #ffffff;
         }
 
-        body, html {
+        * {
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
             margin: 0;
             padding: 0;
-            width: 100%;
-            height: 100%;
             font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
             background-color: var(--bg-dark);
             color: var(--text-color);
             display: flex;
             flex-direction: column;
             align-items: center;
-            overflow-x: hidden;
+            min-height: 100vh;
+            overflow: hidden; /* Verhindert Scrollen der Hintergrund-Blobs */
         }
 
-        /* --- Liquid Background Animation --- */
-        .bg-wrapper {
+        /* Dynamische Hintergrund-Animation (Liquid Glass) */
+        .background-visuals {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
             z-index: -1;
-            background: radial-gradient(circle at center, #08081a 0%, #020205 100%);
+            background: radial-gradient(circle at center, #0a0a15 0%, #000 100%);
         }
 
-        .liquid-blob {
+        .blob {
             position: absolute;
-            width: 600px;
-            height: 600px;
+            width: 500px;
+            height: 500px;
             background: linear-gradient(45deg, #0047ff, #00d2ff);
-            filter: blur(100px);
+            filter: blur(80px);
             border-radius: 50%;
             opacity: 0.2;
-            animation: moveLiquid 20s infinite alternate ease-in-out;
+            animation: liquidMove 20s infinite alternate cubic-bezier(0.45, 0.05, 0.55, 0.95);
         }
 
-        /* Alle 5 Sekunden ändert sich die Position/Farbe subtil über die Phasen */
-        @keyframes moveLiquid {
-            0%   { transform: translate(-10%, -10%) scale(1); background: #0047ff; }
-            25%  { transform: translate(40%, 10%) scale(1.2); background: #007AFF; }
-            50%  { transform: translate(-20%, 50%) scale(0.8); background: #002288; }
-            75%  { transform: translate(20%, -30%) scale(1.1); background: #00d2ff; }
+        /* Ändert alle 5 Sekunden subtil den Look über Keyframes */
+        @keyframes liquidMove {
+            0% { transform: translate(-10%, -10%) scale(1); background: #0047ff; }
+            25% { transform: translate(30%, 15%) scale(1.1); background: #007AFF; }
+            50% { transform: translate(-15%, 40%) scale(0.9); background: #002288; }
+            75% { transform: translate(10%, -20%) scale(1.05); background: #00d2ff; }
             100% { transform: translate(-10%, -10%) scale(1); background: #0047ff; }
         }
 
-        /* --- Content --- */
         header {
-            margin-top: 100px;
+            margin-top: 15vh;
             margin-bottom: 60px;
+            z-index: 10;
         }
 
         h1 {
-            font-size: 3.5rem;
+            font-size: 4rem;
             font-weight: 700;
-            letter-spacing: 20px;
+            letter-spacing: 20px; /* Extremer Apple-Stil */
             text-transform: uppercase;
             margin: 0;
-            background: linear-gradient(180deg, #fff 0%, #888 100%);
+            background: linear-gradient(180deg, #fff 0%, #666 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-align: center;
@@ -82,27 +86,27 @@
             gap: 20px;
             width: 90%;
             max-width: 480px;
-            padding-bottom: 50px;
+            z-index: 10;
         }
 
         .card {
             background: var(--glass-bg);
-            backdrop-filter: blur(35px) saturate(180%);
-            -webkit-backdrop-filter: blur(35px) saturate(180%);
+            backdrop-filter: blur(40px) saturate(200%);
+            -webkit-backdrop-filter: blur(40px) saturate(200%);
             border: 1px solid var(--glass-border);
-            border-radius: 28px;
+            border-radius: 30px;
             padding: 30px;
             text-decoration: none;
             color: inherit;
-            transition: all 0.5s cubic-bezier(0.15, 0.83, 0.66, 1);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             box-shadow: inset 0 1px 1px rgba(255,255,255,0.1);
         }
 
         .card:hover {
-            transform: scale(1.02);
+            transform: scale(1.03);
             background: rgba(255, 255, 255, 0.07);
             border-color: rgba(255, 255, 255, 0.3);
-            box-shadow: inset 0 1px 2px rgba(255,255,255,0.2), 0 20px 40px rgba(0,0,0,0.4);
+            box-shadow: inset 0 1px 2px rgba(255,255,255,0.2), 0 25px 50px rgba(0,0,0,0.5);
         }
 
         .tag {
@@ -110,14 +114,14 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             color: var(--accent-blue);
-            font-weight: 700;
-            margin-bottom: 12px;
+            font-weight: 800;
+            margin-bottom: 10px;
             display: block;
         }
 
         .card h2 {
             margin: 0 0 10px 0;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 600;
         }
 
@@ -131,8 +135,8 @@
 </head>
 <body>
 
-    <div class="bg-wrapper">
-        <div class="liquid-blob"></div>
+    <div class="background-visuals">
+        <div class="blob"></div>
     </div>
 
     <header>
@@ -143,13 +147,13 @@
         <a href="https://softsorf.github.io/Startseite-/" class="card">
             <span class="tag">System</span>
             <h2>Browser-Startseite</h2>
-            <p>Minimalistisches Dashboard für dein tägliches Web-Erlebnis.</p>
+            <p>Ein flüssiges, minimalistisches Dashboard für maximale Effizienz.</p>
         </a>
 
         <a href="https://softsorf.github.io/Ki-assistent/" class="card">
             <span class="tag">Intelligence</span>
             <h2>Nexus AI</h2>
-            <p>Dein intelligenter Begleiter für komplexe Workflows.</p>
+            <p>Fortschrittliche KI-Integration direkt in deinem Workflow.</p>
         </a>
     </div>
 
