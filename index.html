@@ -6,12 +6,11 @@
     <title>NEXUS</title>
     <style>
         :root {
-            --bg-color: #050505;
+            --bg-dark: #000000;
             --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.12);
-            --accent-blue: #007AFF; /* Apple Blue */
-            --text-main: #ffffff;
-            --text-dim: rgba(255, 255, 255, 0.5);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --accent-blue: #007AFF;
+            --text-color: #ffffff;
         }
 
         * {
@@ -22,57 +21,63 @@
         body {
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-color);
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            overflow-x: hidden;
-            /* Subtiler Glow-Effekt im Hintergrund */
-            background-image: 
-                radial-gradient(circle at 50% -20%, #1a1a2e 0%, transparent 50%),
-                radial-gradient(circle at 0% 100%, #0a0a15 0%, transparent 40%);
+            overflow: hidden; /* Verhindert Scrollen der Hintergrund-Blobs */
         }
 
-        /* Flüssiges Element im Hintergrund für den Glass-Effekt */
-        .liquid-blob {
+        /* Dynamische Hintergrund-Animation (Liquid Glass) */
+        .background-visuals {
             position: fixed;
-            top: 20%;
-            left: 50%;
-            width: 400px;
-            height: 400px;
-            background: linear-gradient(45deg, #0047ff, #00d2ff);
-            filter: blur(100px);
-            border-radius: 50%;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
             z-index: -1;
-            opacity: 0.15;
-            transform: translateX(-50%);
-            animation: move 20s infinite alternate;
+            background: radial-gradient(circle at center, #0a0a15 0%, #000 100%);
         }
 
-        @keyframes move {
-            from { transform: translate(-60%, -10%); }
-            to { transform: translate(-40%, 10%); }
+        .blob {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(45deg, #0047ff, #00d2ff);
+            filter: blur(80px);
+            border-radius: 50%;
+            opacity: 0.2;
+            animation: liquidMove 20s infinite alternate cubic-bezier(0.45, 0.05, 0.55, 0.95);
+        }
+
+        /* Ändert alle 5 Sekunden subtil den Look über Keyframes */
+        @keyframes liquidMove {
+            0% { transform: translate(-10%, -10%) scale(1); background: #0047ff; }
+            25% { transform: translate(30%, 15%) scale(1.1); background: #007AFF; }
+            50% { transform: translate(-15%, 40%) scale(0.9); background: #002288; }
+            75% { transform: translate(10%, -20%) scale(1.05); background: #00d2ff; }
+            100% { transform: translate(-10%, -10%) scale(1); background: #0047ff; }
         }
 
         header {
-            margin-top: 120px;
-            margin-bottom: 80px;
-            text-align: center;
+            margin-top: 15vh;
+            margin-bottom: 60px;
+            z-index: 10;
         }
 
         h1 {
             font-size: 4rem;
             font-weight: 700;
-            letter-spacing: 15px;
+            letter-spacing: 20px; /* Extremer Apple-Stil */
             text-transform: uppercase;
             margin: 0;
-            background: linear-gradient(180deg, #ffffff 0%, #a1a1a1 100%);
+            background: linear-gradient(180deg, #fff 0%, #666 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            padding-left: 15px; /* Ausgleich für letter-spacing */
+            text-align: center;
         }
 
         .container {
@@ -80,60 +85,59 @@
             flex-direction: column;
             gap: 20px;
             width: 90%;
-            max-width: 450px;
-            padding-bottom: 100px;
+            max-width: 480px;
+            z-index: 10;
         }
 
         .card {
-            position: relative;
             background: var(--glass-bg);
-            backdrop-filter: blur(30px) saturate(180%);
-            -webkit-backdrop-filter: blur(30px) saturate(180%);
+            backdrop-filter: blur(40px) saturate(200%);
+            -webkit-backdrop-filter: blur(40px) saturate(200%);
             border: 1px solid var(--glass-border);
-            border-radius: 28px;
+            border-radius: 30px;
             padding: 30px;
             text-decoration: none;
             color: inherit;
-            transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
-            /* Innere Lichtkante für Apple-Look */
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             box-shadow: inset 0 1px 1px rgba(255,255,255,0.1);
         }
 
         .card:hover {
-            transform: scale(1.02);
-            background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(255, 255, 255, 0.25);
-            box-shadow: inset 0 1px 1px rgba(255,255,255,0.2), 0 20px 40px rgba(0,0,0,0.3);
+            transform: scale(1.03);
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: inset 0 1px 2px rgba(255,255,255,0.2), 0 25px 50px rgba(0,0,0,0.5);
         }
 
         .tag {
             font-size: 0.7rem;
-            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             color: var(--accent-blue);
-            margin-bottom: 12px;
+            font-weight: 800;
+            margin-bottom: 10px;
             display: block;
         }
 
         .card h2 {
-            margin: 0 0 8px 0;
-            font-size: 1.5rem;
+            margin: 0 0 10px 0;
+            font-size: 1.6rem;
             font-weight: 600;
-            letter-spacing: -0.5px;
         }
 
         .card p {
             margin: 0;
-            font-size: 0.95rem;
-            color: var(--text-dim);
-            line-height: 1.4;
+            font-size: 1rem;
+            color: rgba(255,255,255,0.5);
+            line-height: 1.5;
         }
     </style>
 </head>
 <body>
 
-    <div class="liquid-blob"></div>
+    <div class="background-visuals">
+        <div class="blob"></div>
+    </div>
 
     <header>
         <h1>NEXUS</h1>
@@ -141,15 +145,15 @@
 
     <div class="container">
         <a href="https://softsorf.github.io/Startseite-/" class="card">
-            <span class="tag">Dashboard</span>
+            <span class="tag">System</span>
             <h2>Browser-Startseite</h2>
-            <p>Minimalistisches Design für dein tägliches Web-Erlebnis.</p>
+            <p>Ein flüssiges, minimalistisches Dashboard für maximale Effizienz.</p>
         </a>
 
         <a href="https://softsorf.github.io/Ki-assistent/" class="card">
-            <span class="tag">Artificial Intelligence</span>
+            <span class="tag">Intelligence</span>
             <h2>Nexus AI</h2>
-            <p>Dein intelligenter Begleiter für komplexe Workflows.</p>
+            <p>Fortschrittliche KI-Integration direkt in deinem Workflow.</p>
         </a>
     </div>
 
