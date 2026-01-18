@@ -6,12 +6,12 @@
     <title>NEXUS</title>
     <style>
         :root {
-            --bg-color: #0d0d12;
-            --accent-blue: #00d2ff;
-            --card-bg: rgba(255, 255, 255, 0.03);
-            --card-border: rgba(255, 255, 255, 0.08);
+            --bg-color: #050505;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.12);
+            --accent-blue: #007AFF; /* Apple Blue */
             --text-main: #ffffff;
-            --text-dim: rgba(255, 255, 255, 0.6);
+            --text-dim: rgba(255, 255, 255, 0.5);
         }
 
         * {
@@ -22,103 +22,118 @@
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
             background-color: var(--bg-color);
-            background: radial-gradient(circle at center, #161625 0%, #0d0d12 100%);
             color: var(--text-main);
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
             overflow-x: hidden;
+            /* Subtiler Glow-Effekt im Hintergrund */
+            background-image: 
+                radial-gradient(circle at 50% -20%, #1a1a2e 0%, transparent 50%),
+                radial-gradient(circle at 0% 100%, #0a0a15 0%, transparent 40%);
+        }
+
+        /* Flüssiges Element im Hintergrund für den Glass-Effekt */
+        .liquid-blob {
+            position: fixed;
+            top: 20%;
+            left: 50%;
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(45deg, #0047ff, #00d2ff);
+            filter: blur(100px);
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0.15;
+            transform: translateX(-50%);
+            animation: move 20s infinite alternate;
+        }
+
+        @keyframes move {
+            from { transform: translate(-60%, -10%); }
+            to { transform: translate(-40%, 10%); }
         }
 
         header {
-            margin-top: 100px;
-            margin-bottom: 60px;
+            margin-top: 120px;
+            margin-bottom: 80px;
             text-align: center;
         }
 
         h1 {
-            font-size: 3.5rem;
+            font-size: 4rem;
             font-weight: 700;
-            letter-spacing: 12px;
+            letter-spacing: 15px;
             text-transform: uppercase;
             margin: 0;
-            background: linear-gradient(180deg, #fff 0%, #888 100%);
+            background: linear-gradient(180deg, #ffffff 0%, #a1a1a1 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 15px rgba(255,255,255,0.1));
+            padding-left: 15px; /* Ausgleich für letter-spacing */
         }
 
         .container {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
             width: 90%;
-            max-width: 500px;
-            padding-bottom: 50px;
+            max-width: 450px;
+            padding-bottom: 100px;
         }
 
         .card {
             position: relative;
-            background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--card-border);
-            border-radius: 24px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(30px) saturate(180%);
+            -webkit-backdrop-filter: blur(30px) saturate(180%);
+            border: 1px solid var(--glass-border);
+            border-radius: 28px;
             padding: 30px;
             text-decoration: none;
             color: inherit;
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+            /* Innere Lichtkante für Apple-Look */
+            box-shadow: inset 0 1px 1px rgba(255,255,255,0.1);
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-blue);
+            transform: scale(1.02);
             background: rgba(255, 255, 255, 0.06);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            border-color: rgba(255, 255, 255, 0.25);
+            box-shadow: inset 0 1px 1px rgba(255,255,255,0.2), 0 20px 40px rgba(0,0,0,0.3);
         }
 
         .tag {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 1px;
             color: var(--accent-blue);
-            background: rgba(0, 210, 255, 0.1);
-            padding: 6px 14px;
-            border-radius: 100px;
-            display: inline-block;
-            margin-bottom: 20px;
+            margin-bottom: 12px;
+            display: block;
         }
 
         .card h2 {
-            margin: 0 0 12px 0;
-            font-size: 1.6rem;
+            margin: 0 0 8px 0;
+            font-size: 1.5rem;
             font-weight: 600;
+            letter-spacing: -0.5px;
         }
 
         .card p {
             margin: 0;
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: var(--text-dim);
-            line-height: 1.5;
-        }
-
-        /* Entfernt blaue Streifen oder Glitches durch weiche Übergänge */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: url('https://www.transparenttextures.com/patterns/stardust.png');
-            opacity: 0.1;
-            pointer-events: none;
-            z-index: 1;
+            line-height: 1.4;
         }
     </style>
 </head>
 <body>
+
+    <div class="liquid-blob"></div>
 
     <header>
         <h1>NEXUS</h1>
@@ -126,15 +141,15 @@
 
     <div class="container">
         <a href="https://softsorf.github.io/Startseite-/" class="card">
-            <div class="tag">Webtool</div>
+            <span class="tag">Dashboard</span>
             <h2>Browser-Startseite</h2>
-            <p>Ein minimalistisches Dashboard für maximale Fokusierung im Web.</p>
+            <p>Minimalistisches Design für dein tägliches Web-Erlebnis.</p>
         </a>
 
         <a href="https://softsorf.github.io/Ki-assistent/" class="card">
-            <div class="tag">AI System</div>
+            <span class="tag">Artificial Intelligence</span>
             <h2>Nexus AI</h2>
-            <p>Intelligenter Assistent für automatisierte Workflows und Interaktion.</p>
+            <p>Dein intelligenter Begleiter für komplexe Workflows.</p>
         </a>
     </div>
 
