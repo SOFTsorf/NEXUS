@@ -3,113 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEXUS Projekte</title>
+    <title>NEXUS</title>
     <style>
         :root {
-            --bg-color: #0a0a0c;
-            --card-bg: rgba(255, 255, 255, 0.05);
-            --accent-color: #00d2ff;
-            --text-color: #ffffff;
-            --blur-val: 12px;
+            --bg-color: #0d0d12;
+            --accent-blue: #00d2ff;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --text-main: #ffffff;
+            --text-dim: rgba(255, 255, 255, 0.6);
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
         }
 
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Inter', -apple-system, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background-color: var(--bg-color);
-            color: var(--text-color);
+            background: radial-gradient(circle at center, #161625 0%, #0d0d12 100%);
+            color: var(--text-main);
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            background: radial-gradient(circle at top right, #1a1a2e, #0a0a0c);
+            overflow-x: hidden;
         }
 
         header {
-            margin-top: 80px;
+            margin-top: 100px;
+            margin-bottom: 60px;
             text-align: center;
         }
 
         h1 {
-            font-size: 2.5rem;
-            letter-spacing: 4px;
+            font-size: 3.5rem;
+            font-weight: 700;
+            letter-spacing: 12px;
             text-transform: uppercase;
-            margin-bottom: 10px;
-            background: linear-gradient(to right, #fff, #666);
+            margin: 0;
+            background: linear-gradient(180deg, #fff 0%, #888 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 15px rgba(255,255,255,0.1));
         }
 
         .container {
-            display: flex;
-            gap: 30px;
-            padding: 40px;
-            flex-wrap: wrap;
-            justify-content: center;
-            max-width: 1000px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+            width: 90%;
+            max-width: 500px;
+            padding-bottom: 50px;
         }
 
         .card {
+            position: relative;
             background: var(--card-bg);
-            backdrop-filter: blur(var(--blur-val));
-            -webkit-backdrop-filter: blur(var(--blur-val));
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
             padding: 30px;
-            width: 300px;
-            transition: transform 0.3s ease, border-color 0.3s ease;
             text-decoration: none;
             color: inherit;
-            display: block;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            overflow: hidden;
         }
 
         .card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent-color);
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        .card h2 {
-            margin-top: 0;
-            font-size: 1.5rem;
-            color: var(--accent-color);
-        }
-
-        .card p {
-            opacity: 0.7;
-            line-height: 1.6;
+            transform: translateY(-5px);
+            border-color: var(--accent-blue);
+            background: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
 
         .tag {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent-blue);
             background: rgba(0, 210, 255, 0.1);
-            color: var(--accent-color);
-            padding: 4px 12px;
-            border-radius: 20px;
+            padding: 6px 14px;
+            border-radius: 100px;
             display: inline-block;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .card h2 {
+            margin: 0 0 12px 0;
+            font-size: 1.6rem;
+            font-weight: 600;
+        }
+
+        .card p {
+            margin: 0;
+            font-size: 1rem;
+            color: var(--text-dim);
+            line-height: 1.5;
+        }
+
+        /* Entfernt blaue Streifen oder Glitches durch weiche Übergänge */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/stardust.png');
+            opacity: 0.1;
+            pointer-events: none;
+            z-index: 1;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>NEXUS PROJECTS</h1>
-        <p style="opacity: 0.5;">Innovation & Design</p>
+        <h1>NEXUS</h1>
     </header>
 
     <div class="container">
         <a href="https://softsorf.github.io/Startseite-/" class="card">
-            <span class="tag">Webtool</span>
+            <div class="tag">Webtool</div>
             <h2>Browser-Startseite</h2>
-            <p>Ein personalisiertes Dashboard für deinen Browser – minimalistisch und effizient.</p>
+            <p>Ein minimalistisches Dashboard für maximale Fokusierung im Web.</p>
         </a>
 
         <a href="https://softsorf.github.io/Ki-assistent/" class="card">
-            <span class="tag">AI</span>
+            <div class="tag">AI System</div>
             <h2>Nexus AI</h2>
-            <p>Intelligenter Assistent für komplexe Aufgaben und direkte Interaktion.</p>
+            <p>Intelligenter Assistent für automatisierte Workflows und Interaktion.</p>
         </a>
     </div>
 
