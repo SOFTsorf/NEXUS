@@ -28,10 +28,10 @@
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            overflow: hidden; /* Verhindert Scrollen der Hintergrund-Blobs */
+            overflow-x: hidden; /* Verhindert horizontales Scrollen */
         }
 
-        /* Dynamische Hintergrund-Animation (Liquid Glass) */
+        /* Dynamische Hintergrund-Animation */
         .background-visuals {
             position: fixed;
             top: 0;
@@ -40,38 +40,43 @@
             height: 100vh;
             z-index: -1;
             background: radial-gradient(circle at center, #0a0a15 0%, #000 100%);
+            overflow: hidden;
         }
 
         .blob {
             position: absolute;
-            width: 500px;
-            height: 500px;
+            width: 600px;
+            height: 600px;
             background: linear-gradient(45deg, #0047ff, #00d2ff);
-            filter: blur(80px);
+            filter: blur(100px);
             border-radius: 50%;
-            opacity: 0.2;
-            animation: liquidMove 20s infinite alternate cubic-bezier(0.45, 0.05, 0.55, 0.95);
+            opacity: 0.15;
+            animation: liquidMove 25s infinite alternate ease-in-out;
         }
 
-        /* Ändert alle 5 Sekunden subtil den Look über Keyframes */
+        .blob-2 {
+            top: 40%;
+            left: 30%;
+            background: linear-gradient(45deg, #5e17eb, #007AFF);
+            animation-delay: -5s;
+        }
+
         @keyframes liquidMove {
-            0% { transform: translate(-10%, -10%) scale(1); background: #0047ff; }
-            25% { transform: translate(30%, 15%) scale(1.1); background: #007AFF; }
-            50% { transform: translate(-15%, 40%) scale(0.9); background: #002288; }
-            75% { transform: translate(10%, -20%) scale(1.05); background: #00d2ff; }
-            100% { transform: translate(-10%, -10%) scale(1); background: #0047ff; }
+            0% { transform: translate(-10%, -10%) scale(1); }
+            50% { transform: translate(20%, 10%) scale(1.2); }
+            100% { transform: translate(5%, 25%) scale(0.9); }
         }
 
         header {
-            margin-top: 15vh;
-            margin-bottom: 60px;
+            margin-top: 10vh;
+            margin-bottom: 50px;
             z-index: 10;
         }
 
         h1 {
-            font-size: 4rem;
+            font-size: clamp(2.5rem, 8vw, 4rem); /* Responsive Font */
             font-weight: 700;
-            letter-spacing: 20px; /* Extremer Apple-Stil */
+            letter-spacing: 15px;
             text-transform: uppercase;
             margin: 0;
             background: linear-gradient(180deg, #fff 0%, #666 100%);
@@ -87,6 +92,7 @@
             width: 90%;
             max-width: 480px;
             z-index: 10;
+            padding-bottom: 50px; /* Platz am Ende */
         }
 
         .card {
@@ -94,42 +100,47 @@
             backdrop-filter: blur(40px) saturate(200%);
             -webkit-backdrop-filter: blur(40px) saturate(200%);
             border: 1px solid var(--glass-border);
-            border-radius: 30px;
-            padding: 30px;
+            border-radius: 24px;
+            padding: 25px;
             text-decoration: none;
             color: inherit;
             transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            box-shadow: inset 0 1px 1px rgba(255,255,255,0.1);
+            box-shadow: inset 0 1px 1px rgba(255,255,255,0.05);
         }
 
         .card:hover {
-            transform: scale(1.03);
-            background: rgba(255, 255, 255, 0.07);
+            transform: translateY(-5px) scale(1.02);
+            background: rgba(255, 255, 255, 0.08);
             border-color: rgba(255, 255, 255, 0.3);
-            box-shadow: inset 0 1px 2px rgba(255,255,255,0.2), 0 25px 50px rgba(0,0,0,0.5);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
 
         .tag {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             color: var(--accent-blue);
             font-weight: 800;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             display: block;
         }
 
         .card h2 {
-            margin: 0 0 10px 0;
-            font-size: 1.6rem;
+            margin: 0 0 8px 0;
+            font-size: 1.4rem;
             font-weight: 600;
         }
 
         .card p {
             margin: 0;
-            font-size: 1rem;
-            color: rgba(255,255,255,0.5);
-            line-height: 1.5;
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.4;
+        }
+
+        .new-badge {
+            color: #ff3b30; /* Apple Red für "NEU" */
+            margin-right: 5px;
         }
     </style>
 </head>
@@ -137,26 +148,26 @@
 
     <div class="background-visuals">
         <div class="blob"></div>
+        <div class="blob blob-2"></div>
     </div>
 
     <header>
         <h1>NEXUS</h1>
     </header>
 
-<a href="https://softsorf.github.io/nexusfm" class="card">
+    <main class="container">
+        <a href="https://softsorf.github.io/nexusfm" class="card">
             <span class="tag">Streaming</span>
-            <h2>[❗️NEU] NexusFM</h2>
+            <h2><span class="new-badge">!</span>NexusFM</h2>
             <p>Höre deine Lieblingssender online! Keine Werbung und kostenlos!</p>
         </a>
 
-<a href="https://softsorf.github.io/nexuspost" class="card">
+        <a href="https://softsorf.github.io/nexuspost" class="card">
             <span class="tag">Social Media</span>
-            <h2>[❗️NEU] NexusPost</h2>
+            <h2><span class="new-badge">!</span>NexusPost</h2>
             <p>Poste Bilder und Texte!</p>
         </a>
 
-
-    <div class="container">
         <a href="https://softsorf.github.io/Startseite-/" class="card">
             <span class="tag">Browser</span>
             <h2>Browser-Startseite</h2>
@@ -168,7 +179,7 @@
             <h2>Nexus AI</h2>
             <p>Fortschrittliche KI-Integration direkt in deinem Workflow.</p>
         </a>
-    </div>
+    </main>
 
 </body>
 </html>
