@@ -6,11 +6,12 @@
     <title>NEXUS</title>
     <style>
         :root {
-            --bg-dark: #000000;
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.1);
+            --bg-dark: #050505;
+            --card-bg: #121212;
+            --card-border: #222222;
             --accent-blue: #007AFF;
             --text-color: #ffffff;
+            --text-secondary: #888888;
         }
 
         * {
@@ -21,17 +22,17 @@
         body {
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif;
             background-color: var(--bg-dark);
             color: var(--text-color);
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            overflow-x: hidden; /* Verhindert horizontales Scrollen */
+            overflow-x: hidden;
         }
 
-        /* Dynamische Hintergrund-Animation */
+        /* Dezentere Hintergrund-Visualisierung */
         .background-visuals {
             position: fixed;
             top: 0;
@@ -39,153 +40,157 @@
             width: 100vw;
             height: 100vh;
             z-index: -1;
-            background: radial-gradient(circle at center, #0a0a15 0%, #000 100%);
-            overflow: hidden;
-        }
-
-        .blob {
-            position: absolute;
-            width: 600px;
-            height: 600px;
-            background: linear-gradient(45deg, #0047ff, #00d2ff);
-            filter: blur(100px);
-            border-radius: 50%;
-            opacity: 0.15;
-            animation: liquidMove 25s infinite alternate ease-in-out;
-        }
-
-        .blob-2 {
-            top: 40%;
-            left: 30%;
-            background: linear-gradient(45deg, #5e17eb, #007AFF);
-            animation-delay: -5s;
-        }
-
-        @keyframes liquidMove {
-            0% { transform: translate(-10%, -10%) scale(1); }
-            50% { transform: translate(20%, 10%) scale(1.2); }
-            100% { transform: translate(5%, 25%) scale(0.9); }
+            background: radial-gradient(circle at 50% -20%, #111 0%, #050505 100%);
         }
 
         header {
-            margin-top: 10vh;
-            margin-bottom: 50px;
+            margin-top: 8vh;
+            margin-bottom: 40px;
             z-index: 10;
+            width: 90%;
+            max-width: 600px;
         }
 
         h1 {
-            font-size: clamp(2.5rem, 8vw, 4rem); /* Responsive Font */
+            font-size: clamp(2rem, 6vw, 3rem);
             font-weight: 700;
-            letter-spacing: 15px;
+            letter-spacing: 10px;
             text-transform: uppercase;
             margin: 0;
-            background: linear-gradient(180deg, #fff 0%, #666 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #ffffff;
             text-align: center;
         }
 
         .container {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 16px;
             width: 90%;
             max-width: 480px;
             z-index: 10;
-            padding-bottom: 50px; /* Platz am Ende */
+            padding-bottom: 60px;
         }
 
         .card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(40px) saturate(200%);
-            -webkit-backdrop-filter: blur(40px) saturate(200%);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 25px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 22px;
             text-decoration: none;
             color: inherit;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            box-shadow: inset 0 1px 1px rgba(255,255,255,0.05);
+            transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
         }
 
         .card:hover {
-            transform: translateY(-5px) scale(1.02);
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.3);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            transform: translateY(-2px);
+            background: #181818;
+            border-color: #333333;
+        }
+
+        .card:active {
+            transform: scale(0.98);
         }
 
         .tag {
-            font-size: 0.65rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
             color: var(--accent-blue);
-            font-weight: 800;
+            font-weight: 700;
             margin-bottom: 8px;
             display: block;
         }
 
         .card h2 {
-            margin: 0 0 8px 0;
-            font-size: 1.4rem;
+            margin: 0 0 6px 0;
+            font-size: 1.25rem;
             font-weight: 600;
         }
 
         .card p {
             margin: 0;
-            font-size: 0.95rem;
-            color: rgba(255,255,255,0.6);
-            line-height: 1.4;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
         }
 
         .new-badge {
-            color: #ff3b30; /* Apple Red für "NEU" */
+            color: #ff3b30;
             margin-right: 5px;
+        }
+
+        /* Trenner-Stil */
+        .divider {
+            text-align: center; 
+            color: #222; 
+            margin: 20px 0;
+            letter-spacing: 2px;
+        }
+
+        .demo-title {
+            font-size: 1.5rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            margin: 20px 0;
+            color: var(--text-secondary);
+            text-align: center;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            width: 100%;
+        }
+
+        footer p {
+            color: #555555;
+            font-size: 12px;
+            margin: 5px 0;
+        }
+
+        footer a {
+            color: #888888;
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
 
-    <div class="background-visuals">
-        <div class="blob"></div>
-        <div class="blob blob-2"></div>
-    </div>
+    <div class="background-visuals"></div>
 
     <header>
         <img src="https://lh3.googleusercontent.com/d/1AdC4w34gy3DUWdnocBj57TSzgRyXNafM" 
-     alt="Nexus Logo" 
-     style="width: 90%; max-width: 600px; height: auto; border-radius: 20px; display: block; margin: 20px auto;">
+             alt="Nexus Logo" 
+             style="width: 100%; height: auto; border-radius: 16px; display: block; margin: 0 auto 30px auto;">
 
+        <p style="text-align: center; color: #ffd700; font-weight: 600; font-size: 0.9rem; letter-spacing: 1px; margin-bottom: 15px;">AKTUELL</p>
 
-<p style="text-align: center; color: yellow;">Aktuell:</p>
-
-<img src="https://lh3.googleusercontent.com/d/1xXHAajqQ2i67vhySAT3Qb9vEL4cRsDyz" 
-     alt="NexusFM Vorschau" 
-     style="width: 90%; max-width: 600px; height: auto; border-radius: 20px; display: block; margin: 20px auto;">
-
-
-
-
+        <img src="https://lh3.googleusercontent.com/d/1xXHAajqQ2i67vhySAT3Qb9vEL4cRsDyz" 
+             alt="NexusFM Vorschau" 
+             style="width: 100%; height: auto; border-radius: 16px; display: block; margin: 0 auto;">
     </header>
 
     <main class="container">
         <a href="https://nexusfm-cdcr.vercel.app/" class="card">
             <span class="tag">[❗️ NEU] Streaming</span>
-            <h2><span class="new-badge"></span>NexusFM</h2>
-            <p>Höre deine Lieblingssender online! Keine Werbung und kostenlos!
-
- NEU: Höre jetzt auch Podcast kostenlos online!</p>
+            <h2>NexusFM</h2>
+            <p>Höre deine Lieblingssender online! Keine Werbung und kostenlos! NEU: Höre jetzt auch Podcast kostenlos online!</p>
         </a>
 
-<a href="https://ticketpruefer.vercel.app/" class="card">
+        <a href="https://ticketpruefer.vercel.app/" class="card">
             <span class="tag">[❗️ NEU] Bus&Bahn</span>
-            <h2><span class="new-badge"></span>Bus&Bahn Anzeige</h2>
+            <h2>Bus&Bahn Anzeige</h2>
             <p>-Keine Beschreibung- lol</p>
         </a>
 
         <a href="https://nexuspost.vercel.app/" class="card">
             <span class="tag">[❗️ NEU] Social Media</span>
-            <h2><span class="new-badge"></span>NexusPost</h2>
+            <h2>NexusPost</h2>
             <p>Poste Bilder und Texte!</p>
         </a>
 
@@ -196,48 +201,34 @@
         </a>
 
         <a href="https://ki-assistent-alpha.vercel.app/" class="card">
-            <span class="tag">[❗️ Neues, großes Update] Intelligence</span>
+            <span class="tag">[❗️ Neues Update] Intelligence</span>
             <h2>Nexus AI</h2>
             <p>Fortschrittliche KI-Integration direkt in deinem Workflow.</p>
         </a>
     
+        <div class="divider">▬▬▬▬▬▬▬▬▬▬▬▬</div>
 
-<p style="text-align: center; color: white;">▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬</p>
+        <h2 class="demo-title">Demos</h2>
 
-<h1>Demos</h1>
-<a href="https://nexusfm-demo.vercel.app/" class="card">
+        <a href="https://nexusfm-demo.vercel.app/" class="card">
             <span class="tag">Beta</span>
             <h2>NexusFM - Demo</h2>
             <p>⚠️ Dies ist eine Demo-Version.</p>
         </a>
+    </main>
 
-
-</main>
-
-<div style="text-align: center; margin-top: 20px; padding: 10px;">
-    <p style="color: #888888; font-size: 12px; margin: 0;">
-        Alle Seiten sind von Patrick R..
-    </p>
-
-<div style="text-align: center; margin-top: 20px; padding: 10px;">
-    <p style="color: #888888; font-size: 12px; margin: 0;">
-        By Nexus with ❤️
-    </p>
-    <p style="color: #888888; font-size: 10px; margin-top: 5px; opacity: 0.7;">
-        Alle oben genannten Projekte stammen von Nexus und dürfen in keinster Weise kopiert werden. Nexus ist ein Projekt, das für Design, Funktionalität und Robustheit steht.
-    </p>
-
- <p style="color: #FF0000; font-size: 8px; margin-top: 5px; opacity: 0.7;">
-        Hinweis: "Nexus" hat in keinster Weise etwas mit anderen Firmen/Profilen etc. zu tun.
-    </p>
-</div>
-
-
-<a href="https://nexusinfo.vercel.app/">Datenschutzerklärung</a>
-
-
-
-
+    <footer>
+        <p>Alle Seiten sind von Patrick R..</p>
+        <p>By Nexus with ❤️</p>
+        <p style="max-width: 400px; margin: 10px auto; opacity: 0.6; font-size: 10px;">
+            Alle oben genannten Projekte stammen von Nexus und dürfen in keinster Weise kopiert werden. Nexus steht für Design, Funktionalität und Robustheit.
+        </p>
+        <p style="color: #661111; font-size: 9px; opacity: 0.8;">
+            Hinweis: "Nexus" hat in keinster Weise etwas mit anderen Firmen/Profilen zu tun.
+        </p>
+        <br>
+        <a href="https://nexusinfo.vercel.app/">Datenschutzerklärung</a>
+    </footer>
 
 </body>
 </html>
