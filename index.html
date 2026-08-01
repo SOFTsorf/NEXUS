@@ -1,259 +1,74 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEXUS</title>
+    <title>Webseite nicht verfügbar</title>
     <style>
-        :root {
-            --bg-dark: #000000;
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --accent-blue: #007AFF;
-            --text-color: #ffffff;
-        }
-
         * {
             box-sizing: border-box;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        body {
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-color);
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden; /* Scrollen komplett deaktivieren */
+            background-color: #0f172a;
+            color: #f8fafc;
+            font-family: system-ui, -apple-system, sans-serif;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            overflow-x: hidden; /* Verhindert horizontales Scrollen */
-        }
-
-        /* Dynamische Hintergrund-Animation */
-        .background-visuals {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1;
-            background: radial-gradient(circle at center, #0a0a15 0%, #000 100%);
-            overflow: hidden;
-        }
-
-        .blob {
-            position: absolute;
-            width: 600px;
-            height: 600px;
-            background: linear-gradient(45deg, #0047ff, #00d2ff);
-            filter: blur(100px);
-            border-radius: 50%;
-            opacity: 0.15;
-            animation: liquidMove 25s infinite alternate ease-in-out;
-        }
-
-        .blob-2 {
-            top: 40%;
-            left: 30%;
-            background: linear-gradient(45deg, #5e17eb, #007AFF);
-            animation-delay: -5s;
-        }
-
-        @keyframes liquidMove {
-            0% { transform: translate(-10%, -10%) scale(1); }
-            50% { transform: translate(20%, 10%) scale(1.2); }
-            100% { transform: translate(5%, 25%) scale(0.9); }
-        }
-
-        header {
-            margin-top: 10vh;
-            margin-bottom: 50px;
-            z-index: 10;
-        }
-
-        h1 {
-            font-size: clamp(2.5rem, 8vw, 4rem); /* Responsive Font */
-            font-weight: 700;
-            letter-spacing: 15px;
-            text-transform: uppercase;
-            margin: 0;
-            background: linear-gradient(180deg, #fff 0%, #666 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-align: center;
         }
 
         .container {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            width: 90%;
-            max-width: 480px;
-            z-index: 10;
-            padding-bottom: 50px; /* Platz am Ende */
+            position: relative;
+            text-align: center;
+            padding: 20px;
         }
 
-        .card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(40px) saturate(200%);
-            -webkit-backdrop-filter: blur(40px) saturate(200%);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 25px;
-            text-decoration: none;
-            color: inherit;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            box-shadow: inset 0 1px 1px rgba(255,255,255,0.05);
+        .text {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #e2e8f0;
+            position: relative;
+            z-index: 1;
         }
 
-        .card:hover {
-            transform: translateY(-5px) scale(1.02);
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.3);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        /* Rotes X direkt über dem Text */
+        .cross-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
         }
 
-        .tag {
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--accent-blue);
-            font-weight: 800;
-            margin-bottom: 8px;
-            display: block;
-        }
-
-        .card h2 {
-            margin: 0 0 8px 0;
-            font-size: 1.4rem;
-            font-weight: 600;
-        }
-
-        .card p {
-            margin: 0;
-            font-size: 0.95rem;
-            color: rgba(255,255,255,0.6);
-            line-height: 1.4;
-        }
-
-        .new-badge {
-            color: #ff3b30; /* Apple Red für "NEU" */
-            margin-right: 5px;
+        .cross-overlay svg {
+            width: 100%;
+            height: 100%;
+            stroke: #ef4444;
+            stroke-width: 6;
+            stroke-linecap: round;
         }
     </style>
 </head>
 <body>
 
-    <div class="background-visuals">
-        <div class="blob"></div>
-        <div class="blob blob-2"></div>
+    <div class="container">
+        <h1 class="text">Diese Webseite ist nicht mehr verfügbar</h1>
+        <div class="cross-overlay">
+            <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+                <line x1="5" y1="5" x2="95" y2="95" />
+                <line x1="95" y1="5" x2="5" y2="95" />
+            </svg>
+        </div>
     </div>
-
-    <header>
-        <img src="https://lh3.googleusercontent.com/d/1AdC4w34gy3DUWdnocBj57TSzgRyXNafM" 
-     alt="Nexus Logo" 
-     style="width: 90%; max-width: 600px; height: auto; border-radius: 20px; display: block; margin: 20px auto;">
-
-
-<p style="text-align: center; color: yellow;">Aktuell:</p>
-
-<img src="https://lh3.googleusercontent.com/d/1xXHAajqQ2i67vhySAT3Qb9vEL4cRsDyz" 
-     alt="NexusFM Vorschau" 
-     style="width: 90%; max-width: 600px; height: auto; border-radius: 20px; display: block; margin: 20px auto;">
-
-
-
-
-    </header>
-
-    <main class="container">
-       
-<a href="https://down-apk-nine.vercel.app/"class=card>
-            <span class="tag">[❗️ NEU] APKs & Apps</span>
-            <h2><span class="new-badge"></span>DownAPK</h2>
-            <p>Downloade deine Apps als Apk! [Nur für Android]</p>
-        </a>
-
-
- <a href="https://podstream-theta.vercel.app/" class="card">
-            <span class="tag">[❗️ NEU] Music</span>
-            <h2><span class="new-badge"></span>MusicBack</h2>
-            <p>Entdecke neue Musik!</p>
-        </a>
-
- <a href="https://nexusfm-cdcr.vercel.app/" class="card">
-            <span class="tag">[❗️ NEU] Streaming</span>
-            <h2><span class="new-badge"></span>NexusFM</h2>
-            <p>Höre deine Lieblingssender online! Keine Werbung und kostenlos!
-
- NEU: Höre jetzt auch Podcast kostenlos online!</p>
-        </a>
-
-<a href="https://ticketpruefer.vercel.app/" class="card">
-            <span class="tag">[❗️ NEU] Bus&Bahn</span>
-            <h2><span class="new-badge"></span>Bus&Bahn Anzeige</h2>
-            <p>-Keine Beschreibung- lol</p>
-        </a>
-
-        <a href="https://nexuspost.vercel.app/" class="card">
-            <span class="tag">[❗️ NEU] Social Media</span>
-            <h2><span class="new-badge"></span>NexusPost</h2>
-            <p>Poste Bilder und Texte!</p>
-        </a>
-
-        <a href="https://startseite-two.vercel.app/" class="card">
-            <span class="tag">Browser</span>
-            <h2>Browser-Startseite</h2>
-            <p>Ein flüssiges, minimalistisches Dashboard für maximale Effizienz.</p>
-        </a>
-
-        <a href="https://ki-assistent-alpha.vercel.app/" class="card">
-            <span class="tag">[❗️ Neues, großes Update] Intelligence</span>
-            <h2>Nexus AI</h2>
-            <p>Fortschrittliche KI-Integration direkt in deinem Workflow.</p>
-        </a>
-    
-
-<p style="text-align: center; color: white;">▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬</p>
-
-<h1>Demos</h1>
-<a href="https://nexusfm-demo.vercel.app/" class="card">
-            <span class="tag">Beta</span>
-            <h2>NexusFM - Demo</h2>
-            <p>⚠️ Dies ist eine Demo-Version.</p>
-        </a>
-
-
-</main>
-
-<div style="text-align: center; margin-top: 20px; padding: 10px;">
-    <p style="color: #888888; font-size: 12px; margin: 0;">
-        Alle Seiten sind von Patrick R..
-    </p>
-
-<div style="text-align: center; margin-top: 20px; padding: 10px;">
-    <p style="color: #888888; font-size: 12px; margin: 0;">
-        By Nexus with ❤️
-    </p>
-    <p style="color: #888888; font-size: 10px; margin-top: 5px; opacity: 0.7;">
-        Alle oben genannten Projekte stammen von Nexus und dürfen in keinster Weise kopiert werden. Nexus ist ein Projekt, das für Design, Funktionalität und Robustheit steht.
-    </p>
-
- <p style="color: #FF0000; font-size: 8px; margin-top: 5px; opacity: 0.7;">
-        Hinweis: "Nexus" hat in keinster Weise etwas mit anderen Firmen/Profilen etc. zu tun.
-    </p>
-</div>
-
-
-<a href="https://nexusinfo.vercel.app/">Datenschutzerklärung</a>
-
-
-
-
 
 </body>
 </html>
