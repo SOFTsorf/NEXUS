@@ -54,53 +54,55 @@
             line-height: 1.3;
         }
 
-        /* Standard / leicht altmodischer Banner-Stil */
+        /* Schlichter, ganz normaler Standard-Banner */
         .floating-banner {
             position: fixed;
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
-            background-color: #ffffe0;
-            border: 2px solid #666;
-            padding: 8px 12px;
-            box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 10px 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             z-index: 9999;
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-family: Arial, sans-serif;
+            gap: 12px;
             font-size: 14px;
-            color: #000;
+            color: #333333;
         }
 
         .banner-btn {
-            background-color: #e0e0e0;
-            color: #000;
-            border: 1px solid #767676;
-            padding: 4px 10px;
+            background-color: #0070f3;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            padding: 6px 14px;
             text-decoration: none;
             font-size: 13px;
+            font-weight: 500;
             cursor: pointer;
-            display: inline-block;
+            transition: background-color 0.2s ease;
         }
 
         .banner-btn:hover {
-            background-color: #d0d0d0;
+            background-color: #0051a2;
         }
 
         .close-btn {
             background: none;
             border: none;
-            font-size: 16px;
-            font-weight: bold;
+            font-size: 18px;
             cursor: pointer;
-            margin-left: 5px;
-            color: #333;
+            color: #888888;
             line-height: 1;
+            padding: 0 4px;
+            margin-left: 4px;
         }
 
         .close-btn:hover {
-            color: #ff0000;
+            color: #1a1a1a;
         }
     </style>
 </head>
@@ -120,7 +122,7 @@
 
     <div id="floating-banner" class="floating-banner">
         <span>Schau dir unser neustes Projekt an.</span>
-        <a href="https://cliqposts.vercel.app/" target="_blank" rel="noopener noreferrer" class="banner-btn">Hier klicken</a>
+        <a href="https://cliqposts.vercel.app/" target="_blank" rel="noopener noreferrer" class="banner-btn">Öffnen</a>
         <button class="close-btn" onclick="document.getElementById('floating-banner').style.display='none';">&times;</button>
     </div>
 
