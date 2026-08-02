@@ -35,7 +35,6 @@
 
         .icon-container {
             margin: 0 auto 3vh auto;
-            /* Flexibel angepasst & kleiner gemacht */
             width: clamp(48px, 12vw, 75px);
             height: clamp(48px, 12vw, 75px);
         }
@@ -48,46 +47,44 @@
 
         h1 {
             color: #1a1a1a;
-            /* Passt sich der Bildschirmgröße an */
             font-size: clamp(18px, 4vw, 26px);
             font-weight: 600;
             line-height: 1.3;
         }
 
-        /* Schlichter, ganz normaler Standard-Banner */
+        /* Schlichter Standard-Banner */
         .floating-banner {
             position: fixed;
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
             background-color: #ffffff;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 10px 16px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            padding: 10px 14px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
             z-index: 9999;
             display: flex;
             align-items: center;
             gap: 12px;
             font-size: 14px;
-            color: #333333;
+            color: #333;
         }
 
         .banner-btn {
-            background-color: #0070f3;
+            background-color: #0066cc;
             color: #ffffff;
             border: none;
-            border-radius: 5px;
-            padding: 6px 14px;
+            border-radius: 4px;
+            padding: 6px 12px;
             text-decoration: none;
             font-size: 13px;
-            font-weight: 500;
             cursor: pointer;
-            transition: background-color 0.2s ease;
+            display: inline-block;
         }
 
         .banner-btn:hover {
-            background-color: #0051a2;
+            background-color: #0052a3;
         }
 
         .close-btn {
@@ -95,14 +92,13 @@
             border: none;
             font-size: 18px;
             cursor: pointer;
-            color: #888888;
+            color: #777;
             line-height: 1;
-            padding: 0 4px;
-            margin-left: 4px;
+            padding: 0 2px;
         }
 
         .close-btn:hover {
-            color: #1a1a1a;
+            color: #000;
         }
     </style>
 </head>
